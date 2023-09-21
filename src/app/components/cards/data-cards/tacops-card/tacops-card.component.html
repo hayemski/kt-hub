@@ -1,0 +1,28 @@
+<div class="text-center o-name">
+  <h1
+    class="p-2 black"
+    [style.background]="backgroundColor"
+    [style.color]="fontColor"
+  >
+   {{ card.tacops?.archetype }}
+  </h1>
+</div>
+
+<div class="text-center o-name">
+  <h1 class="p-2 black" style="color: white;">
+    {{ card.tacops?.title }}
+  </h1>
+</div>
+
+<div style="margin-top: 1em; display: flex; flex-direction: column; padding: 0.5em">
+  <div #row3 class="fill">
+    <p
+      class="space"
+      style=""
+      [innerHTML]="card.tacops?.description | symReplace"
+    ></p>
+  </div>
+  <img style="height: 200px;  opacity: 0.1;  position: absolute; top: 50%;  left: 50%; pointer-events: none;
+  transform: translateX(-50%);" [src]="'/assets/pics/'+card.svgBckg+'.svg'"/>
+</div>
+

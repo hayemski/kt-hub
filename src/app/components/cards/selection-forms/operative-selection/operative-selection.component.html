@@ -1,0 +1,24 @@
+<div class="">
+  <div class="f-sa">
+    <mat-form-field class="" [formGroup]="weaponForm">
+      <mat-label>Operative</mat-label>
+      <mat-select formControlName="wOperative">
+        <mat-option *ngFor="let operative of operatives" [value]="operative">
+          {{ operative.opname }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field class="">
+      <mat-label>Ability</mat-label>
+      <mat-select (selectionChange)="changeAbility($event)" value="full">
+        <mat-option value='full'>
+          Full abilities
+        </mat-option>
+        <mat-option value="nameOnly">
+          Name only
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+</div>

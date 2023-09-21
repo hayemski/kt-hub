@@ -1,0 +1,76 @@
+
+.o-name, .o-name>h1{
+  font-family: 'Anton', sans-serif;
+  color: white;
+  font-size: 1.8em;
+}
+
+.o-stats{
+  font-family: 'Anton', sans-serif;
+
+}
+
+.o-stats > div:first-of-type{
+  padding: 0.5rem;
+  color: white;
+  background-color: black;
+}
+
+.o-stats > div:nth-of-type(2) {
+  padding: 0.5rem;
+  color: rgb(3, 1, 1);
+  font-size: 1.3em;
+  background-color: rgb(209, 209, 209);
+}
+
+.weapon-item {
+  font-size: 1.2em;
+}
+
+.weapon-header {
+  display: flex;
+  background-color: rgb(65, 65, 65);
+  color: white;
+  padding: 0.3em;
+  width: 100%;
+}
+
+.weapon-type {
+  height: 18px;
+  flex: 0 0 auto;
+}
+
+.weapon-name {
+  width: 100%;
+  padding-left: 0.3em;
+}
+
+.weapon-profiles {
+  display: flex;
+  flex-direction: column;
+}
+
+.weapon-profile {
+  display: flex;
+  align-items: center;
+  background-color: rgb(65, 65, 65);
+  color: white;
+  padding: 0.3em;
+  width: 100%;
+}
+
+.weapon-profile-name {
+  flex-grow: 10;
+  width: 4em;
+  padding-left: 2.2em;
+}
+
+.weapon-profile-value {
+  flex-grow: 1;
+  text-align: end;
+}
+
+.weapon-profile-sr {
+  flex-grow: 1;
+}
+

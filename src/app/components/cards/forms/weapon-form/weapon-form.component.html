@@ -1,0 +1,34 @@
+<div class="">
+    <h2>Add a weapon</h2>
+</div>
+
+<div class="f-sa">
+  <mat-form-field class="col-3" [formGroup]="weaponForm">
+    <mat-label>Weapon type</mat-label>
+    <mat-select formControlName="wType">
+      <mat-option *ngFor="let weapon of wTypes" [value]="weapon.type">
+        {{weapon.type}} <img style="height: 7px; width: 7px;" src="{{weapon.pic}}" alt="">
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field class="col-3" [formGroup]="weaponForm">
+      <mat-label>Name</mat-label>
+      <input matInput placeholder="Weapon" formControlName="wName"/>
+  </mat-form-field>
+
+  <mat-form-field class="col-1" [formGroup]="weaponForm">
+    <mat-label>A</mat-label>
+    <input matInput placeholder="Weapon" formControlName="wAtt"/>
+</mat-form-field>
+
+<mat-form-field class="col-1" [formGroup]="weaponForm">
+  <mat-label>BS</mat-label>
+  <input matInput placeholder="Weapon" formControlName="wBs"/>
+</mat-form-field>
+
+<mat-form-field class="col-1" [formGroup]="weaponForm">
+  <mat-label>D</mat-label>
+  <input matInput placeholder="Weapon" formControlName="wDmg"/>
+</mat-form-field>
+</div>

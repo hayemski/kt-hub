@@ -1,0 +1,26 @@
+
+  <div class="text-center o-name">
+    <h1 class="p-2 black" [style.background]="backgroundColor" [style.color]="fontColor">
+      <!-- {{ card.ploy?.ploytype === "T" ? "TACTICAL PLOY" : "STRATEGICAL PLOY" }} -->
+      EQUIPMENT
+    </h1>
+  </div>
+  <div class="text-center o-name">
+    <h1 class="p-2 black" style="color:white;">
+      {{card.equipment?.eqname}} ({{card.equipment?.eqpts}} EP)
+    </h1>
+  </div>
+  <div class="equipment">
+  <div style="margin-top: 1em; display: flex; flex-direction: column; padding: 0.5em">
+    <div #row3 class="fill">
+      <p
+        style="flex: 1; font-weight: 500; text-align: justify; text-justify: inter-word; line-height: 20px; font-size: 26px; line-height: 26px;"
+        [innerHTML]="card.equipment?.eqdescription | symReplace"
+      ></p>
+    </div>
+    <img style="height: 200px;  opacity: 0.1;  position: absolute; top: 50%;  left: 50%; pointer-events: none;
+    transform: translateX(-50%);" [src]="'/assets/pics/'+card.svgBckg+'.svg'"/>
+  </div>
+
+</div>
+

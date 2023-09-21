@@ -1,0 +1,17 @@
+<div class="">
+  <div class="f-sa">
+
+    <mat-form-field class="" [formGroup]="weaponForm" style="width: 300px;">
+      <mat-label>Tac ops</mat-label>
+      <mat-select formControlName="wTacops">
+        <mat-option
+          *ngFor="let tacops of tacops"
+          [value]="tacops"
+        >
+         [{{tacops.archetype}}] {{ tacops.title }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+
+</div>

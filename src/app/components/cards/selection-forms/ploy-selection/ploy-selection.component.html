@@ -1,0 +1,14 @@
+
+<div class="f-sa">
+  <mat-form-field class="" [formGroup]="weaponForm">
+    <mat-label>Ploy</mat-label>
+    <mat-select formControlName="wPloy">
+      <mat-option
+        *ngFor="let ploy of ploys"
+        [value]="ploy"
+      >
+        {{ ploy.ployname }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+</div>

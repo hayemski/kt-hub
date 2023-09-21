@@ -1,0 +1,78 @@
+<div class="w-100 weapon-row" *ngFor="let item of card.weapons" style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">
+  <div
+    *ngIf="item.profiles.length > 1"
+    class="d-flex w-100 weapon-inline-row"
+  >
+    <div class="w-100">
+      <img
+        [src]="
+          item.weptype === 'M'
+            ? '/assets/pics/weptypeM.png'
+            : '/assets/pics/weptypeR.png'
+        "
+        alt="Weapon Type"
+        class="weapon-icon"
+      />
+      <span style="width: 100%; padding-left: 0.3em">
+        {{ item.wepname }}
+      </span>
+    </div>
+
+    <div
+      class="w-100"
+      *ngFor="let prof of item.profiles"
+      style="display: flex"
+    >
+      <span style="flex-grow: 10; width: 4em; padding-left: 1.5em; padding-top: 0.2em;">
+        - {{ prof.name }}
+        <span
+          *ngIf="prof.SR"
+          [innerHTML]="' (' + prof.SR + ')' | symReplace"
+        ></span>
+      </span>
+      <span class="weapon-stat">
+        {{ prof.A }}
+      </span>
+      <span class="weapon-stat">
+        {{ prof.BS }}
+      </span>
+      <span class="weapon-stat">
+        {{ prof.D }}
+      </span>
+    </div>
+  </div>
+  <div
+    *ngIf="item.profiles.length === 1"
+    class="d-flex align-items-center w-100 weapon-inline-row"
+    style="
+      display: flex;
+    "
+  >
+    <img
+      [src]="
+        item.weptype === 'M'
+          ? '/assets/pics/weptypeM.png'
+          : '/assets/pics/weptypeR.png'
+      "
+      alt="Weapon Type"
+      class="weapon-icon"
+
+    />
+    <span style="flex-grow: 10; width: 4em; padding-left: 0.5em"
+      >{{ item.wepname
+      }}<span
+        *ngIf="item.profiles[0]?.SR"
+        [innerHTML]="' (' + item.profiles[0].SR + ')' | symReplace"
+      ></span
+    ></span>
+    <span class="weapon-stat">{{
+      item.profiles[0].A
+    }}</span>
+    <span class="weapon-stat">{{
+      item.profiles[0].BS
+    }}</span>
+    <span class="weapon-stat">{{
+      item.profiles[0].D
+    }}</span>
+  </div>
+</div>

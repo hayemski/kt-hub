@@ -1,0 +1,154 @@
+<div class="form-container">
+    <div style="text-align:center">
+      <h1>
+        New Kill Team Narrative Campaign
+      </h1>
+    </div>
+  
+    <form>
+<!-- 5 columns for the first five fields -->
+<div style="display: flex; justify-content: space-between;">
+    <div style="flex: 1 1 calc(20% - 10px); margin-right: 20px;">
+        <label for="playerName">Player Name:</label>
+        <input id="playerName" style="width: 100%;">
+      </div>
+      <div style="flex: 1 1 calc(20% - 10px); margin-right: 20px;">
+        <label for="factionKeyword">Faction Keyword:</label>
+        <input id="factionKeyword" style="width: 100%;">
+      </div>
+    <div style="flex: 1 1 calc(20% - 10px); margin-right: 20px;">
+      <label for="killTeamName">Kill Team Name:</label>
+      <input id="killTeamName" style="width: 100%;">
+    </div>
+    <div style="flex: 1 1 calc(20% - 10px); margin-right: 20px;">
+      <label for="baseOfOperation">Base of Operation:</label>
+      <input id="baseOfOperation" style="width: 100%;">
+    </div>
+    <div style="flex: 1 1 calc(20% - 10px);">
+      <label for="quirks">Quirks:</label>
+      <input id="quirks" style="width: 100%;">
+    </div>
+  </div>
+  
+  
+<!-- Flexbox row with 3 columns -->
+<div style="display: flex; justify-content: space-between; margin-top: 16px; align-items: stretch;">
+  
+    <!-- Spec Ops Log -->
+    <div style="flex: 1 1 40%; margin-right: 10px; height: 150px;">
+      <label>Spec Ops Log:</label>
+      <table>
+        <tbody>
+            <tr>
+                <td style="width: 80%; padding-bottom: 10px;"><input style="width: 95%;"></td>
+                <td style="width: 5%; padding-bottom: 10px;"><input style="width: 100%;"></td>
+                <td style="width: 5%; padding-bottom: 10px;"><input style="width: 100%;"></td>
+              </tr>
+              <tr>
+                <td style="width: 80%; padding-bottom: 10px;"><input style="width: 95%;"></td>
+                <td style="width: 5%; padding-bottom: 10px;"><input style="width: 100%;"></td>
+                <td style="width: 5%; padding-bottom: 10px;"><input style="width: 100%;"></td>
+              </tr>
+              <tr>
+                <td style="width: 80%;"><input style="width: 95%;"></td>
+                <td style="width: 5%;"><input style="width: 100%;"></td>
+                <td style="width: 5%;"><input style="width: 100%;"></td>
+              </tr>
+        </tbody>
+      </table>
+    </div>
+    
+    <!-- Req Points and Asset Cap -->
+    <div style="flex: 1 1 5%; margin-right: 10px; height: 150px; text-align: center;">
+      <div style="margin-bottom: 10px;">
+        <label for="reqPoints">Req Points:</label>
+        <input id="reqPoints" style="width: 60%; height: 30px;">
+      </div>
+      <div>
+        <label for="assetCap">Asset Cap:</label>
+        <input id="assetCap" style="width: 60%; height: 30px;">
+      </div>
+    </div>
+  
+    <!-- Strategic Assets -->
+    <div style="flex: 1 1 40%; margin-left: 10px; height: 150px;">
+      <label>Strategic Assets:</label>
+        <input style="width: 100%; margin-bottom: 5px;">
+        <input style="width: 100%; margin-bottom: 5px;">
+        <input style="width: 100%; margin-bottom: 5px;">
+        <input style="width: 100%; margin-bottom: 5px;">
+        <input style="width: 100%;">
+    </div>
+  
+  </div>
+  
+    <!-- 3 columns for Strategic Assets, Stash, and Notes -->
+<div class="form-row" style="margin-bottom: 0;">
+  
+    <!-- Stash -->
+    <div class="form-group">
+      <label>Stash:</label>
+      
+      <input style="height: 80px;">
+    </div>
+  
+    <!-- Notes -->
+    <div class="form-group">
+      <label>Notes:</label>
+      <input style="height: 80px;">
+
+    </div>
+  </div>
+
+    <!-- Operatives Table -->
+    <h2>Operatives</h2>
+<table border="1">
+  <thead>
+    <tr>
+      <th style="width: 15%;">Name</th>
+      <th style="width: 15%;">Class</th>
+      <th style="width: 30%;">Loadout</th>
+      <th style="width: 30%;">BH</th>
+      <th style="width: 5%;">Rank</th>
+      <th style="width: 5%;">XP</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let operative of operatives">
+      <td><input [(ngModel)]="operative.name" style="width: 100%;"></td>
+      <td><input [(ngModel)]="operative.class" style="width: 100%;"></td>
+      <td><input [(ngModel)]="operative.loadout" style="width: 100%;"></td>
+      <td><input [(ngModel)]="operative.bh" style="width: 100%;"></td>
+      <td><input [(ngModel)]="operative.rank" style="width: 100%;"></td>
+      <td><input [(ngModel)]="operative.xp" style="width: 100%;"></td>
+    </tr>
+  </tbody>
+</table>
+
+    <!-- <button (click)="submit()">Create Campaign</button>-->
+
+  </form>
+  
+  
+  <!-- Display the form data -->
+  <div *ngIf="submitted">
+    <h2>Your Campaign Details:</h2>
+    <p>Kill Team Name: {{ killTeamName }}</p>
+    <p>Player Name: {{ playerName }}</p>
+    <p>Faction Keyword: {{ factionKeyword }}</p>
+    <p>Base of Operation: {{ baseOfOperation }}</p>
+    <p>Quirks: {{ quirks }}</p>
+    <p>Spec Ops Log 1: {{ specOpsLog1 }}</p>
+    <p>Spec Ops Log 2: {{ specOpsLog2 }}</p>
+    <p>Spec Ops Log 3: {{ specOpsLog3 }}</p>
+    <p>Req Points: {{ reqPoints }}</p>
+    <p>Asset Cap: {{ assetCap }}</p>
+    <p>Strategic Assets 1: {{ strategicAsset1 }}</p>
+    <p>Strategic Assets 2: {{ strategicAsset2 }}</p>
+    <p>Strategic Assets 3: {{ strategicAsset3 }}</p>
+    <p>Strategic Assets 4: {{ strategicAsset4 }}</p>
+    <p>Strategic Assets 5: {{ strategicAsset5 }}</p>
+    <p>Stash: {{ stash }}</p>
+    <p>Notes: {{ notes }}</p>
+  </div>
+</div>

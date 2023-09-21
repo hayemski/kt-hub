@@ -1,0 +1,43 @@
+<div
+class="operativeAction"
+  style=" display: flex; flex-direction: column; height: 100%; text-align: justify; text-justify: inter-word; margin-top: 0.5em;"
+>
+  <div #row3 class="fill" style="flex: 1">
+    <span *ngIf="card.abilitiesFull == 'nameOnly'" style="padding-top: 0.2em;">
+      <span style="font-weight: bold; ">
+        Abilities:
+      </span>
+    </span>
+    <ng-container *ngFor="let item of card.abilities; let i = index">
+      <div *ngIf="card.abilitiesFull == 'full'" style="padding-top: 0.2em;">
+        <span style="font-weight: bold; ">
+          {{ item.title }}
+        </span>
+          <span  [innerHTML]="' - '+item.description  | symReplace">
+          </span>
+      </div>
+      <span *ngIf="card.abilitiesFull == 'nameOnly'" style="padding-top: 0.2em;">
+        <span>
+          {{ item.title }}
+          <ng-container *ngIf="card.abilities && i < card.abilities.length - 1">,</ng-container>
+        </span>
+      </span>
+    </ng-container>
+    <ng-container *ngFor="let item of card.uniqueActions">
+      <div style="padding-top: 0.2em;">
+        <span  style="font-weight: bold;">
+          {{ item.title }}
+          <span *ngIf="item.AP">
+            ({{item.AP}} AP)
+          </span>
+          -
+        </span>
+        <span [innerHTML]="item.description  | symReplace">
+        </span>
+      </div>
+    </ng-container>
+  </div>
+  <img *ngIf="dual" style="height: 200px;  opacity: 0.1;  position: absolute;  width: 100%;  top: 50%; pointer-events: none; left: 50%;
+  transform: translateX(-50%);" [src]="'/assets/pics/'+card.svgBckg+'.svg'"/>
+
+</div>

@@ -1,0 +1,79 @@
+* {
+  font-family: 'Oswald', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+
+.weapon-item {
+  font-size: 1.2em;
+  font-family: 'Oswald', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  display: flex;
+  font-size:26px
+
+}
+
+.weapon-stat {
+  flex-grow: 1;
+  text-align: end;
+  width: 30px;
+}
+
+.weapon-row{
+  font-size:32px
+}
+
+.weapon-header {
+  display: flex;
+  background-color: rgb(65, 65, 65);
+  color: white;
+  padding: 0.5em;
+  width: 100%;
+}
+
+.weapon-type {
+  height: 18px;
+  flex: 0 0 auto;
+}
+
+.weapon-name {
+  width: 100%;
+  padding-left: 0.3em;
+}
+
+.weapon-profiles {
+  display: flex;
+  flex-direction: column;
+}
+
+.weapon-inline-row{
+  background-color: rgb(65, 65, 65);
+  color: white;
+  padding: 0.1em 0.3em;
+}
+
+.weapon-profile {
+  display: flex;
+  align-items: center;
+  background-color: rgb(65, 65, 65);
+  color: white;
+  width: 100%;
+}
+
+.weapon-icon{
+  height: 30px;
+  flex: 0 0 auto;
+}
+
+.weapon-profile-name {
+  flex-grow: 10;
+  width: 4em;
+  padding-left: 2.2em;
+}
+
+.weapon-profile-value {
+  flex-grow: 1;
+  text-align: end;
+}
+
+.weapon-profile-sr {
+  flex-grow: 1;
+}

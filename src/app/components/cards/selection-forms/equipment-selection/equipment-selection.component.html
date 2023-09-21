@@ -1,0 +1,17 @@
+<div class="">
+  <div class="f-sa">
+
+    <mat-form-field class="" [formGroup]="weaponForm">
+      <mat-label>Equipment</mat-label>
+      <mat-select formControlName="wEquipment">
+        <mat-option
+          *ngFor="let equipment of equipment"
+          [value]="equipment"
+        >
+          {{ equipment.eqname }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+
+</div>

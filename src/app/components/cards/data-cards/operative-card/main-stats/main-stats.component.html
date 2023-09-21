@@ -1,0 +1,48 @@
+<div class="text-center o-name">
+  <h1 class="p-2" [style.background]="backgroundColor" [style.color]="fontColor">{{ card.name === "" ? "Operative Name" : card.name }}</h1>
+</div>
+<div #stats style="font-size: 2.2em; width: 100%;" class="f-s-b">
+  <span class="text-center w-100 o-stats">
+    <div>M</div>
+    <div>{{ card.movement }}</div>
+  </span>
+  <span class="text-center w-100 o-stats">
+    <div>APL</div>
+    <div>{{ card.APL }}</div>
+  </span>
+  <span class="text-center w-100 o-stats">
+    <div>GA</div>
+    <div>
+      {{ card.GA }}
+    </div>
+  </span>
+  <span class="text-center w-100 o-stats">
+    <div>DF</div>
+    <div>
+      {{ card.DF }}
+    </div>
+  </span>
+  <span class="text-center w-100 o-stats">
+    <div>SV</div>
+    <div>{{ card.save }}</div>
+  </span>
+  <span class="text-center w-100 o-stats">
+    <div>W</div>
+    <div>
+      {{ card.wounds }}
+    </div>
+  </span>
+</div>
+
+<!-- WEAPONS -->
+<div class="pt-2">
+  <app-weapons [card]="card" ></app-weapons>
+</div>
+
+<img style="height: 200px;  opacity: 0.1;  position: absolute; top: 50%;  left: 50%; pointer-events: none;
+transform: translateX(-50%);" [src]="'/assets/pics/'+card.svgBckg+'.svg'"/>
+
+
+
+
+

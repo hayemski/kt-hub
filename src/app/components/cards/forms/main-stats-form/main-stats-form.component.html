@@ -1,0 +1,37 @@
+<div class="f-sa">
+  <mat-form-field>
+    <mat-label>Name</mat-label>
+    <input matInput placeholder="Name" [(ngModel)]="card.name" />
+  </mat-form-field>
+</div>
+
+<div class="f-sa">
+  <mat-form-field class="col-3">
+    <mat-label>Movement</mat-label>
+    <input matInput placeholder="M" [(ngModel)]="card.movement" />
+  </mat-form-field>
+  <mat-form-field class="col-3">
+    <mat-label>APL</mat-label>
+    <input matInput placeholder="APL" [(ngModel)]="card.APL" />
+  </mat-form-field>
+  <mat-form-field class="col-3">
+    <mat-label>GA</mat-label>
+    <input matInput placeholder="Group activation" [(ngModel)]="card.GA" />
+  </mat-form-field>
+</div>
+
+<div class="f-sa">
+  <mat-form-field class="col-3">
+    <mat-label>Defence</mat-label>
+    <input matInput placeholder="Defence" [(ngModel)]="card.DF" />
+  </mat-form-field>
+
+  <mat-form-field class="col-3">
+    <mat-label>Save</mat-label>
+    <input matInput placeholder="Save" [(ngModel)]="card.save" />
+  </mat-form-field>
+  <mat-form-field class="col-3">
+    <mat-label>Wounds</mat-label>
+    <input matInput placeholder="Wounds" [(ngModel)]="card.wounds" />
+  </mat-form-field>
+</div>

@@ -1,0 +1,36 @@
+.o-name,
+.o-name>h1 {
+  font-family: 'Anton', sans-serif;
+  color: white;
+  font-size: 1.8em;
+}
+
+.black {
+  background-color: black;
+}
+
+h1 {
+  box-sizing: border-box;
+}
+
+.mat-h1,
+.mat-headline,
+.mat-typography h1 {
+  font: 400 24px/32px Roboto, "Helvetica Neue", sans-serif;
+  letter-spacing: normal;
+  margin: 0em !important;
+}
+
+.space {
+  flex: 1;
+  font-weight: 500;
+  text-align: justify;
+  text-justify: inter-word;
+  line-height: 20px;
+  font-size: 28px;
+  line-height: 28px;
+}
+
+strong {
+  display: block;
+}
