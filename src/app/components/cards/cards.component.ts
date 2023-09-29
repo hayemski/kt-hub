@@ -25,7 +25,6 @@ export class CardsComponent implements OnInit {
   @ViewChild('equipmentCard', { static: false }) equipmentCard!: ElementRef;
   @ViewChild('tacopsCard', { static: false }) tacopsCard!: ElementRef;
 
-
   dual = false;
   allData: any = allData;
   cardType!: string;
@@ -77,20 +76,20 @@ export class CardsComponent implements OnInit {
       },
     });
 
-    this.selectionForm.get('wFaction')?.valueChanges.subscribe((value) =>{
+    this.selectionForm.get('wFaction')?.valueChanges.subscribe((value) => {
+      console.log(value);
       this.selectionForm.get('wKillTeam')?.enable();
-    })
-
+    });
 
     this.selectionForm.get('wKillTeam')?.valueChanges.subscribe((value) => {
-      if(value !=''){
+      if (value != '') {
         this.selectionForm.get('wCardType')?.enable();
         this.selectionForm.get('wFactionBgd')?.enable();
 
         this.operatives = value.fireteams[0]?.operatives;
         this.ploys = value.ploys.strat.concat(value.ploys.tac);
         this.equipment = value.equipments.filter(
-          (item: any) => item.eqcategory === 'Equipment'
+          (item: any) => item.eqcategory === 'Equipment' || item.eqcategory === 'Rare Equipment'
         );
         this.tacops = value.tacops;
       }
@@ -98,48 +97,54 @@ export class CardsComponent implements OnInit {
   }
 
   downloadImage() {
-    switch(this.cardType)
-    {
-      case "operative":
-      html2canvas(this.operativeCard.nativeElement, { scale: 2.85 }).then((canvas) => {
-        const imgData = canvas.toDataURL('image/png');
-        const link = document.createElement('a');
-        link.download = this.card.name+'.png';
-        link.href = imgData;
-        link.click();
-      });
-      break;
-      case "ploy":
-        html2canvas(this.ployCard.nativeElement, { scale: 2.85 }).then((canvas) => {
-          const imgData = canvas.toDataURL('image/png');
-          const link = document.createElement('a');
-          link.download = this.card.ploy?.ployname+'.png';
-          link.href = imgData;
-          link.click();
-        });
+    switch (this.cardType) {
+      case 'operative':
+        html2canvas(this.operativeCard.nativeElement, { scale: 2.85 }).then(
+          (canvas) => {
+            const imgData = canvas.toDataURL('image/png');
+            const link = document.createElement('a');
+            link.download = this.card.name + '.png';
+            link.href = imgData;
+            link.click();
+          }
+        );
         break;
-        case "equipment":
-          html2canvas(this.equipmentCard.nativeElement, { scale: 2.85 }).then((canvas) => {
+      case 'ploy':
+        html2canvas(this.ployCard.nativeElement, { scale: 2.85 }).then(
+          (canvas) => {
             const imgData = canvas.toDataURL('image/png');
             const link = document.createElement('a');
-            link.download = this.card.equipment?.eqname+'.png';
+            link.download = this.card.ploy?.ployname + '.png';
             link.href = imgData;
             link.click();
-          });
-          break;
-          case "tacops":
-          html2canvas(this.tacopsCard.nativeElement, { scale: 2.85 }).then((canvas) => {
+          }
+        );
+        break;
+      case 'equipment':
+        html2canvas(this.equipmentCard.nativeElement, { scale: 2.85 }).then(
+          (canvas) => {
             const imgData = canvas.toDataURL('image/png');
             const link = document.createElement('a');
-            link.download = this.card.tacops?.title+'.png';
+            link.download = this.card.equipment?.eqname + '.png';
             link.href = imgData;
             link.click();
-          });
-          break;
-        default:
-          return;
+          }
+        );
+        break;
+      case 'tacops':
+        html2canvas(this.tacopsCard.nativeElement, { scale: 2.85 }).then(
+          (canvas) => {
+            const imgData = canvas.toDataURL('image/png');
+            const link = document.createElement('a');
+            link.download = this.card.tacops?.title + '.png';
+            link.href = imgData;
+            link.click();
+          }
+        );
+        break;
+      default:
+        return;
     }
-
   }
 
   typeSelect(value: any) {
