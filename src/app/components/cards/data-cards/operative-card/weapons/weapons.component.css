@@ -78,9 +78,9 @@
   flex-grow: 1;
 }
 
-@media screen and (max-width: 980px) {
+@media screen and (max-width: 990px) {
   .weapon-row{
-    font-size: 5vw;
+    font-size: 4vw;
   }
 
   .weapon-icon{
