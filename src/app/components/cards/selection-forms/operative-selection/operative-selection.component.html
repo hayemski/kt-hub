@@ -1,4 +1,4 @@
-<div class="">
+<div class="f-sa wrap">
   <div class="f-sa wrap">
     <mat-form-field class="" [formGroup]="weaponForm">
       <mat-label>Operative</mat-label>
@@ -8,16 +8,13 @@
         </mat-option>
       </mat-select>
     </mat-form-field>
-
+  </div>
+  <div>
     <mat-form-field class="">
       <mat-label>Ability</mat-label>
       <mat-select (selectionChange)="changeAbility($event)" value="full">
-        <mat-option value='full'>
-          Full abilities
-        </mat-option>
-        <mat-option value="nameOnly">
-          Name only
-        </mat-option>
+        <mat-option value="full"> Full abilities </mat-option>
+        <mat-option value="nameOnly"> Name only </mat-option>
       </mat-select>
     </mat-form-field>
   </div>

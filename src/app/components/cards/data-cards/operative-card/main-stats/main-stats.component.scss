@@ -7,7 +7,7 @@
 
 .o-stats{
   font-family: 'Anton', sans-serif;
-  font-size: 6vw;
+  
 }
 
 .o-stats > div:first-of-type{
@@ -77,6 +77,11 @@
 @media screen and (max-width: 990px) {
   .o-name, .o-name>h1{
     font-size: 5.2vw;
+  }
+
+  .o-stats{
+    font-size: 6vw;
+  
   }
 }
   
