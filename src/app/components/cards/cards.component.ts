@@ -3,6 +3,7 @@ import {
   ElementRef,
   EventEmitter,
   Input,
+  OnDestroy,
   OnInit,
   Output,
   ViewChild,
@@ -13,13 +14,15 @@ import html2canvas from 'html2canvas';
 import { allData } from 'src/assets/compendium';
 import { CardsService } from 'src/app/services/cards.service';
 import { backgroundImages } from './cards-config';
+import { CssUtilsService } from 'src/app/services/css-utils.service';
+import { ScreenType } from 'src/app/models/screen-type';
 
 @Component({
   selector: 'app-cards',
   templateUrl: './cards.component.html',
   styleUrls: ['./cards.component.scss'],
 })
-export class CardsComponent implements OnInit {
+export class CardsComponent implements OnInit, OnDestroy {
   @ViewChild('operativeCard', { static: false }) operativeCard!: ElementRef;
   @ViewChild('ployCard', { static: false }) ployCard!: ElementRef;
   @ViewChild('equipmentCard', { static: false }) equipmentCard!: ElementRef;
@@ -45,7 +48,84 @@ export class CardsComponent implements OnInit {
   equipment!: any;
   tacops!: any;
 
-  constructor(private cardsService: CardsService) {}
+  screenType!: ScreenType;
+  cardStyle: any = {};
+
+  constructor(
+    private cardsService: CardsService,
+    private cssUtilsService: CssUtilsService
+  ) {}
+
+  ngOnInit() {
+    this.initCssService();
+    this.initCardsService();
+
+    window.addEventListener('resize', this.updateCardWidth.bind(this));
+    this.updateCardWidth(); // call once to set initial value
+
+    this.selectionForm.get('wFaction')?.valueChanges.subscribe((value) => {
+      this.selectionForm.get('wKillTeam')?.enable();
+    });
+
+    this.selectionForm.get('wKillTeam')?.valueChanges.subscribe((value) => {
+      if (value != '') {
+        this.selectionForm.get('wCardType')?.enable();
+        this.selectionForm.get('wFactionBgd')?.enable();
+
+        this.operatives = value.fireteams[0]?.operatives;
+        this.ploys = value.ploys.strat.concat(value.ploys.tac);
+        this.equipment = value.equipments.filter(
+          (item: any) =>
+            item.eqcategory === 'Equipment' ||
+            item.eqcategory === 'Rare Equipment'
+        );
+        this.tacops = value.tacops;
+      }
+    });
+  }
+
+  ngOnDestroy() {
+    window.removeEventListener('resize', this.updateCardWidth.bind(this));
+  }
+
+  initCssService() {
+    this.cssUtilsService.ScreenType$.subscribe((data) => {
+      if (data) {
+        this.screenType = data;
+      }
+    });
+  }
+
+  initCardsService() {
+    this.cardsService.card$.subscribe({
+      next: (data) => {
+        console.log(data);
+        this.card = data;
+      },
+    });
+
+    this.cardsService.weaponForm$.subscribe({
+      next: (data) => {
+        this.selectionForm = data;
+      },
+    });
+  }
+
+  updateCardWidth() {
+    const windowWidth = window.innerWidth;
+    const calculatedHeight = windowWidth * 2.85;
+
+    this.cardStyle = {
+      'max-width': `${860}px`,
+    };
+
+    if (this.card) {
+      if (this.screenType !== ScreenType.largeDesktop) {
+        if (windowWidth < 860) this.card.width = windowWidth-30;
+        this.card.height = calculatedHeight;
+      }
+    }
+  }
 
   changePloy(event: any) {
     this.ploys = event as Ploy[];
@@ -61,39 +141,6 @@ export class CardsComponent implements OnInit {
 
   changeTacops(event: any) {
     this.card.tacops = event;
-  }
-
-  ngOnInit() {
-    this.cardsService.card$.subscribe({
-      next: (data) => {
-        this.card = data;
-      },
-    });
-
-    this.cardsService.weaponForm$.subscribe({
-      next: (data) => {
-        this.selectionForm = data;
-      },
-    });
-
-    this.selectionForm.get('wFaction')?.valueChanges.subscribe((value) => {
-      console.log(value);
-      this.selectionForm.get('wKillTeam')?.enable();
-    });
-
-    this.selectionForm.get('wKillTeam')?.valueChanges.subscribe((value) => {
-      if (value != '') {
-        this.selectionForm.get('wCardType')?.enable();
-        this.selectionForm.get('wFactionBgd')?.enable();
-
-        this.operatives = value.fireteams[0]?.operatives;
-        this.ploys = value.ploys.strat.concat(value.ploys.tac);
-        this.equipment = value.equipments.filter(
-          (item: any) => item.eqcategory === 'Equipment' || item.eqcategory === 'Rare Equipment'
-        );
-        this.tacops = value.tacops;
-      }
-    });
   }
 
   downloadImage() {

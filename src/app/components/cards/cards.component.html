@@ -1,22 +1,26 @@
-<div class="options-card">
-  <mat-card style="padding: 1em">
+<div [ngStyle]="cardStyle" class="options-card p-4">
+  <mat-card class="mat-card-card" style="padding: 1em">
     <div class="p-2">
       <!-- COLOR OPTIONS -->
-      <div class="f-center">
-        <div>
-          <mat-label style="padding-right: 1em" class="mat-form-field-label"
-            >Background Color</mat-label
-          >
+      <div class="f-sa wrap">
+        <div class="p-2">
+          <div>
+            <mat-label style="padding-right: 1em" class="mat-form-field-label"
+              >Background Color</mat-label
+            >
+          </div>
           <input
             class="matInput"
             [(colorPicker)]="backgroundColor"
             [style.background]="backgroundColor"
           />
         </div>
-        <div style="padding-left: 3em">
-          <mat-label style="padding-right: 1em" class="mat-form-field-label"
-            >Text Color</mat-label
-          >
+        <div class="p-2">
+          <div>
+            <mat-label style="padding-right: 1em" class="mat-form-field-label"
+              >Text Color</mat-label
+            >
+          </div>
           <input
             class="matInput"
             [(colorPicker)]="fontColor"
@@ -26,7 +30,7 @@
       </div>
     </div>
     <!-- ADVANCED OPTIONS -->
-    <div class="p-2">
+    <div *ngIf="this.screenType === 3" class="p-2 advanced-options">
       <mat-accordion>
         <mat-expansion-panel hideToggle>
           <mat-expansion-panel-header>
@@ -119,147 +123,154 @@
       </mat-form-field>
     </div>
 
-    <div *ngIf="cardType === 'operative'">
-      <app-operative-selection
-        [card]="card"
-        [ploys]="ploys"
-        (ployEmitter)="changePloy($event)"
-        [allData]="allData"
-        [operatives]="operatives"
-        [weaponForm]="selectionForm"
-      ></app-operative-selection>
-    </div>
+    <div class="wrap">
+      <div *ngIf="cardType === 'operative'">
+        <app-operative-selection
+          [card]="card"
+          [ploys]="ploys"
+          (ployEmitter)="changePloy($event)"
+          [allData]="allData"
+          [operatives]="operatives"
+          [weaponForm]="selectionForm"
+        ></app-operative-selection>
+      </div>
 
-    <div *ngIf="cardType === 'ploy'">
-      <app-ploy-selection
-        [card]="card"
-        [ploys]="ploys"
-        (ployEmitter)="changePloySelect($event)"
-      ></app-ploy-selection>
-    </div>
+      <div *ngIf="cardType === 'ploy'">
+        <app-ploy-selection
+          [card]="card"
+          [ploys]="ploys"
+          (ployEmitter)="changePloySelect($event)"
+        ></app-ploy-selection>
+      </div>
 
-    <div *ngIf="cardType === 'equipment'">
-      <app-equipment-selection
-        [card]="card"
-        [equipment]="equipment"
-        (equipmentEmitter)="changeEquipment($event)"
-      ></app-equipment-selection>
-    </div>
+      <div *ngIf="cardType === 'equipment'">
+        <app-equipment-selection
+          [card]="card"
+          [equipment]="equipment"
+          (equipmentEmitter)="changeEquipment($event)"
+        ></app-equipment-selection>
+      </div>
 
-    <div *ngIf="cardType === 'tacops'">
-      <app-tacops-selection
-        [card]="card"
-        [tacops]="tacops"
-        (tacopsEmitter)="changeTacops($event)"
-      ></app-tacops-selection>
+      <div *ngIf="cardType === 'tacops'">
+        <app-tacops-selection
+          [card]="card"
+          [tacops]="tacops"
+          (tacopsEmitter)="changeTacops($event)"
+        ></app-tacops-selection>
+      </div>
     </div>
   </mat-card>
 </div>
 
-<div *ngIf="cardType" class="f-sa pt-2">
+<div *ngIf="cardType && screenType < 4" class="f-sa pt-2">
   <button mat-raised-button disabled="false" (click)="downloadImage()">
     Export as Image
   </button>
 </div>
 
-<!-- FIRST CARD OPERATIVE -->
-<div *ngIf="cardType === 'operative'" class="f-sa wrap">
-  <div
-    #operativeCard
-    style="
-      margin-top: 1em;
-      display: flex;
-      justify-content: center;
-      border: 1px solid black;
-    "
-  >
-    <mat-card
-      style="width: 100%; height: 100%; padding: 1em"
-      [ngStyle]="{ width: card.width + 'px', height: card.height + 'px' }"
+<div class="p-4">
+  <!-- FIRST CARD OPERATIVE -->
+  <div *ngIf="cardType === 'operative'" class="f-sa wrap">
+    <div
+      #operativeCard
+      style="
+        margin-top: 1em;
+        display: flex;
+        justify-content: center;
+        border: 1px solid black;
+      "
     >
-      <app-main-stats
-        [backgroundColor]="backgroundColor"
-        [fontColor]="fontColor"
-      ></app-main-stats>
-      <app-abilities-notes
-        style="overflow: overlay"
-        [dual]="dual"
-        *ngIf="!dual"
-      ></app-abilities-notes>
-    </mat-card>
+      <mat-card
+        style="width: 100%; height: 100%; padding: 1em"
+        [ngStyle]="{ width: card.width + 'px', height: card.height + 'px' }"
+      >
+        <app-main-stats
+          [backgroundColor]="backgroundColor"
+          [fontColor]="fontColor"
+        ></app-main-stats>
+        <app-abilities-notes
+          style="overflow: overlay"
+          [dual]="dual"
+          *ngIf="!dual"
+        ></app-abilities-notes>
+      </mat-card>
+    </div>
+
+    <div
+      style="margin-top: 1em; margin-left: 1em"
+      *ngIf="dual && cardType === 'operative'"
+    >
+      <mat-card
+        style="padding: 1em"
+        [ngStyle]="{ width: card.width + 'px', height: card.height + 'px' }"
+      >
+        <app-abilities-notes
+          style="overflow: overlay"
+          [dual]="dual"
+        ></app-abilities-notes>
+      </mat-card>
+    </div>
   </div>
 
+  <!-- OPERATIVE CARD -->
   <div
-    style="margin-top: 1em; margin-left: 1em"
-    *ngIf="dual && cardType === 'operative'"
+    *ngIf="cardType === 'ploy'"
+    class="f-sa"
+    style="margin-top: 1em; margin-bottom: 3em"
   >
-    <mat-card
-      style="padding: 1em"
-      [ngStyle]="{ width: card.width + 'px', height: card.height + 'px' }"
-    >
-      <app-abilities-notes
-        style="overflow: overlay"
-        [dual]="dual"
-      ></app-abilities-notes>
-    </mat-card>
+    <div style="justify-content: center; border: 1px solid black" #ployCard>
+      <mat-card
+        [ngStyle]="{ width: card.width + 'px', height: card.height + 'px' }"
+        style="padding: 1em"
+      >
+        <app-ploy-card
+          [card]="card"
+          [backgroundColor]="backgroundColor"
+          [fontColor]="fontColor"
+        ></app-ploy-card>
+      </mat-card>
+    </div>
   </div>
-</div>
-
-<!-- OPERATIVE CARD -->
-<div
-  *ngIf="cardType === 'ploy'"
-  class="f-sa"
-  style="margin-top: 1em; margin-bottom: 3em"
->
-  <div style="justify-content: center; border: 1px solid black" #ployCard>
-    <mat-card
-      [ngStyle]="{ width: card.width + 'px', height: card.height + 'px' }"
-      style="padding: 1em"
+  <!-- EQUIPMENT CARD -->
+  <div
+    *ngIf="cardType === 'equipment'"
+    class="f-sa"
+    style="margin-top: 1em; margin-bottom: 3em"
+  >
+    <div
+      style="justify-content: center; border: 1px solid black"
+      #equipmentCard
     >
-      <app-ploy-card
-        [card]="card"
-        [backgroundColor]="backgroundColor"
-        [fontColor]="fontColor"
-      ></app-ploy-card>
-    </mat-card>
+      <mat-card
+        [ngStyle]="{ width: card.width + 'px', height: card.height + 'px' }"
+        style="padding: 1em"
+      >
+        <app-equipment-card
+          [card]="card"
+          [equipment]="equipment"
+          [backgroundColor]="backgroundColor"
+          [fontColor]="fontColor"
+        ></app-equipment-card>
+      </mat-card>
+    </div>
   </div>
-</div>
-<!-- EQUIPMENT CARD -->
-<div
-  *ngIf="cardType === 'equipment'"
-  class="f-sa"
-  style="margin-top: 1em; margin-bottom: 3em"
->
-  <div style="justify-content: center; border: 1px solid black" #equipmentCard>
-    <mat-card
-      [ngStyle]="{ width: card.width + 'px', height: card.height + 'px' }"
-      style="padding: 1em"
-    >
-      <app-equipment-card
-        [card]="card"
-        [equipment]="equipment"
-        [backgroundColor]="backgroundColor"
-        [fontColor]="fontColor"
-      ></app-equipment-card>
-    </mat-card>
-  </div>
-</div>
-<!-- TAC OPS CARD-->
-<div
-  *ngIf="cardType === 'tacops'"
-  class="f-sa"
-  style="margin-top: 1em; margin-bottom: 3em"
->
-  <div style="justify-content: center; border: 1px solid black" #tacopsCard>
-    <mat-card
-      [ngStyle]="{ width: card.width + 'px', height: card.height + 'px' }"
-      style="padding: 1em"
-    >
-      <app-tacops-card
-        [card]="card"
-        [backgroundColor]="backgroundColor"
-        [fontColor]="fontColor"
-      ></app-tacops-card>
-    </mat-card>
+  <!-- TAC OPS CARD-->
+  <div
+    *ngIf="cardType === 'tacops'"
+    class="f-sa"
+    style="margin-top: 1em; margin-bottom: 3em"
+  >
+    <div style="justify-content: center; border: 1px solid black" #tacopsCard>
+      <mat-card
+        [ngStyle]="{ width: card.width + 'px', height: card.height + 'px' }"
+        style="padding: 1em"
+      >
+        <app-tacops-card
+          [card]="card"
+          [backgroundColor]="backgroundColor"
+          [fontColor]="fontColor"
+        ></app-tacops-card>
+      </mat-card>
+    </div>
   </div>
 </div>

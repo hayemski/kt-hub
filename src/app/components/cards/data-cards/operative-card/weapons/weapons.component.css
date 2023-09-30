@@ -77,3 +77,14 @@
 .weapon-profile-sr {
   flex-grow: 1;
 }
+
+@media screen and (max-width: 980px) {
+  .weapon-row{
+    font-size: 5vw;
+  }
+
+  .weapon-icon{
+    height: 20px;
+
+  }
+}
