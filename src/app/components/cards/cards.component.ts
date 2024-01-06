@@ -112,19 +112,21 @@ export class CardsComponent implements OnInit, OnDestroy {
   }
 
   updateCardWidth() {
-    const windowWidth = window.innerWidth;
-    const calculatedHeight = windowWidth * 2.85;
+    // const windowWidth = window.innerWidth;
+    // const calculatedHeight = windowWidth * 2.85;
 
-    this.cardStyle = {
-      'max-width': `${860}px`,
-    };
+    // console.log(calculatedHeight );
 
-    if (this.card) {
-      if (this.screenType !== ScreenType.largeDesktop) {
-        if (windowWidth < 860) this.card.width = windowWidth-30;
-        this.card.height = calculatedHeight;
-      }
-    }
+    // this.cardStyle = {
+    //   'max-width': `${860}px`,
+    // };
+
+    // if (this.card) {
+    //   if (this.screenType !== ScreenType.largeDesktop) {
+    //     if (windowWidth < 860) this.card.width = windowWidth-30;
+    //     this.card.height = calculatedHeight;
+    //   }
+    // }
   }
 
   changePloy(event: any) {
